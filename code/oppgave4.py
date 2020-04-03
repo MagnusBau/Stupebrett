@@ -1,4 +1,3 @@
-
 import sympy as sym
 
 x= sym.Symbol('x')
@@ -11,4 +10,6 @@ y = (f/(24*E*I))*x**2*(x**2 + 4*L*x + 6*L**2)
 
 for i in range(4):
     y = sym.diff(y, x)
-print(y)
+print("y'''' = ", y)
+print("Setter inn for y'''' i Euler-Bernouilli-likningen:  ", E * I * y)
+
