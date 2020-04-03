@@ -18,9 +18,8 @@ h = length/n
 matrixA = generateA(n)
 matrixB = np.array([[(pow(h, 4) / (E * I)) * f]] * n)
 
-print(matrixA)
-print(matrixB)
+
 matrixY = solve(matrixA, matrixB)
 print(matrixY)
 # Check solution
-# print("Solution: " + str(np.allclose(np.dot(matrixA, matrixY), matrixB)))
+print("Solution: " + str(np.allclose(np.dot(matrixA, matrixY), matrixB)))
