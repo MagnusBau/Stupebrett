@@ -13,29 +13,30 @@ g = -9.81
 f = tetthet*w*d*g
 h = L / 0.2
 
+
 def eksaktLos(x):
-    return (f/(24*E*I))*pow(x,2)*(pow(x,2) - 4*L*x + 6*pow(L, 2))
+    return (f/(24*E*I))*pow(x, 2)*(pow(x, 2) - 4*L*x + 6*pow(L, 2))
 
 
-y = np.array([eksaktLos(0.2)])
+def ye():
+    ye = np.array([eksaktLos(0.2)])
+    for i in range(2, 11, 1):
+        x = 0.2 * i
+        ye = np.append(ye, [eksaktLos(x)])
+    return ye
 
 
-for i in range(2, 11, 1):
-    x = 0.2 * i
-    y = np.append(y, [eksaktLos(x)])
+def numFjerdeDer(ye = ye()):
+    A = generateA(int(h))
+    ans = np.dot(A, ye) / pow(h, 4)
+    return ans
 
 
-A = generateA(int(h))
+print("ye: ")
+print(ye())
 
-ans = np.dot(A, y) / pow(h, 4)
-
+ans = numFjerdeDer()
+print("Numerisk fjerdederiverte: ")
 print(ans)
-
-ones = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
-comp = f/(E*I) * ones
-
-print(comp)
-
-print(la.norm(ans-comp, np.inf))
 
 
