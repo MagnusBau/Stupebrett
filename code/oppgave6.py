@@ -16,8 +16,8 @@ personWeight = 50.0
 personLength = 0.3
 
 correct_solution = (f / (24 * E * I)) * pow(length, 2) * (pow(length, 2) - 4 * length * length + 6 * pow(length, 2)) \
-                   - ((g * p * length) / (E * I * np.pi)) * ((pow(Lp, 3)) * np.sin(np.pi)) - pow(length, 3) / 6 + pow(
-    length, 3) / 2 - pow(length, 3) / pow(np.pi, 2)
+                   - (((g * p * length) / (E * I * np.pi)) * (((pow(Lp, 3)) * np.sin(np.pi)) - (pow(length, 3) / 6) + (pow(
+    length, 3) / 2) - (pow(length, 3) / pow(np.pi, 2))))
 
 
 def solve_s(x):
