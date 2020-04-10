@@ -21,7 +21,7 @@ correct_solution = (f / (24 * E * I)) * pow(length, 2) * (pow(length, 2) - 4 * l
 
 
 def solve_s(x):
-    s = - p * g * np.sin(Lp * x)
+    s = - p * g * np.sin(np.pi/length * x)
     return s
 
 
@@ -37,10 +37,10 @@ def solve_6(n):
     return matrixY, kondisjonstall
 
 
-for j in range(1, 12):
+for j in range(1, 10):
     n = 10 * pow(2, j)
     approx, kondisjonstall = solve_6(n)
-    print(kondisjonstall)
+    print(approx[n-1])
     approx = approx[n - 1]
     error = correct_solution - approx
     print(error)
