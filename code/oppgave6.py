@@ -37,7 +37,7 @@ def solve_6(n):
     return matrixY, kondisjonstall
 
 
-for j in range(1, 10):
+for j in range(1, 12):
     n = 10 * pow(2, j)
     approx, kondisjonstall = solve_6(n)
     print(approx[n-1])
