@@ -13,7 +13,7 @@ correct_solution = (f / (24 * E * I)) * pow(length, 2) * (pow(length, 2) - 4 * l
 # print(solve_3(10))
 # correct solution
 
-for j in range(1, 10):
+for j in range(1, 12):
     n = 10 * pow(2, j)
     approx, kondisjonstall = solve_3(n)
     print(kondisjonstall)
