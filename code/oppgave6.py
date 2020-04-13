@@ -43,4 +43,6 @@ for j in range(1, 12):
     print(approx[n-1])
     approx = approx[n - 1]
     error = correct_solution - approx
+    print(kondisjonstall)
     print(error)
+    print("\n")
