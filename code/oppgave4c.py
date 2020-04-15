@@ -1,52 +1,49 @@
-
-from oppgave2 import generateA
-import numpy as np
-from numpy import linalg as la
-
-E = 1.3 *pow(10, 10)
-w = 0.30
-d = 0.03
-tetthet = 480.0
-L = 2.0
-I = w*pow(d, 3)/12.0
+import scipy as sp
+from scipy.sparse import spdiags
+from scipy.sparse import lil_matrix
+from scipy.sparse import csr_matrix
 g = -9.81
-f = tetthet*w*d*g
-h = L / 0.2
+E = 1.3 * 10**10
+I = 67.5 * 10**(-8)
+L = 2.0
+w = 0.3
+d = 0.03
+tetthet = 480
+f = -480 * w * d * g
 
+def lagA(n):
+    e = sp.ones(n)
+    A = spdiags([e, -4 * e, 6 * e, -4 * e, e], [-2, -1, 0, 1, 2], n, n)
+    A = lil_matrix(A)
+    B = csr_matrix([[16, -9, (8 / 3), -(1 / 4)],
+                    [(16 / 17), -(60 / 17), (72 / 17), -(28 / 17)],
+                    [-(12 / 17), (96 / 17), -(156 / 17), (72 / 17)]])
+    A[0, 0:4] = B[0, :]
+    A[n - 2, n - 4:n] = B[1, :]
+    A[n - 1, n - 4:n] = B[2, :]
+    return A
 
-def eksaktLos(x):
-    return (f/(24*E*I))*pow(x, 2)*(pow(x, 2) - 4*L*x + 6*pow(L, 2))
+def lagY(x):
+    return (f / (24 * E * I)) * (x ** 2) * (x ** 2 - 4 * L * x + 6 * (L ** 2))
 
 
 def ye():
-    ye = np.array([eksaktLos(0.2)])
-    for i in range(2, 11, 1):
-        x = 0.2 * i
-        ye = np.append(ye, [eksaktLos(x)])
-    return ye
+    a = [0 for x in range(0, 10)]
+    index = 0
+    for i in [float(j) / 10 for j in range(2, 22, 2)]:
+        a[index] += lagY(i)
+        index += 1
+    return a
 
 
-def numFjerdeDer():
-    y = ye()
-    A = generateA(int(h))
-    ans = (1 / pow(h, 4)) * A.dot(y)
-    '''
-    alt = []
-    for i in range(0, 10):
-        temp = 0
-        for j in range(0, 10):
-            temp += A[i][j] * y[j]
-        alt.append(temp / pow(h, 4))
-    print(alt)
-    '''
-    return ans
+def fjerdeDeriverte(n):
+    A = lagA(n)
+    h = L / n
+    ye1 = ye()
+    return (1 / h ** 4) * A * ye1
 
-
-print("ye: ")
-print(ye())
-
-ans = numFjerdeDer()
 print("Numerisk fjerdederiverte: ")
-print(ans)
+print(fjerdeDeriverte(10))
+
 
 
