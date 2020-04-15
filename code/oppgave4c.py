@@ -11,7 +11,7 @@ d = 0.03
 tetthet = 480
 f = -480 * w * d * g
 
-def lagA(n):
+def genA(n):
     e = sp.ones(n)
     A = spdiags([e, -4 * e, 6 * e, -4 * e, e], [-2, -1, 0, 1, 2], n, n)
     A = lil_matrix(A)
@@ -23,27 +23,27 @@ def lagA(n):
     A[n - 1, n - 4:n] = B[2, :]
     return A
 
-def lagY(x):
+def genYe(x):
     return (f / (24 * E * I)) * (x ** 2) * (x ** 2 - 4 * L * x + 6 * (L ** 2))
 
 
 def ye():
-    a = [0 for x in range(0, 10)]
-    index = 0
+    z = [0 for x in range(0, 10)]
+    start = 0
     for i in [float(j) / 10 for j in range(2, 22, 2)]:
-        a[index] += lagY(i)
-        index += 1
-    return a
+        z[start] += genYe(i)
+        start += 1
+    return z
 
 
-def fjerdeDeriverte(n):
-    A = lagA(n)
+def derivert(n):
+    A = genA(n)
     h = L / n
     ye1 = ye()
     return (1 / h ** 4) * A * ye1
 
 print("Numerisk fjerdederiverte: ")
-print(fjerdeDeriverte(10))
+print(derivert(10))
 
 
 
