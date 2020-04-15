@@ -11,6 +11,11 @@ d = 0.03
 tetthet = 480
 f = -480 * w * d * g
 
+
+def genYe(x):
+    return (f / (24 * E * I)) * (x ** 2) * (x ** 2 - 4 * L * x + 6 * (L ** 2))
+
+
 def genA(n):
     ones = sp.ones(n)
     A = spdiags([ones, -4 * ones, 6 * ones, -4 * ones, ones], [-2, -1, 0, 1, 2], n, n)
@@ -22,9 +27,6 @@ def genA(n):
     A[n - 2, n - 4:n] = A2[1, :]
     A[n - 1, n - 4:n] = A2[2, :]
     return A
-
-def genYe(x):
-    return (f / (24 * E * I)) * (x ** 2) * (x ** 2 - 4 * L * x + 6 * (L ** 2))
 
 
 def ye():
