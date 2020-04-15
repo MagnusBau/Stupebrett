@@ -26,9 +26,19 @@ def ye():
     return ye
 
 
-def numFjerdeDer(ye = ye()):
+def numFjerdeDer():
+    y = ye()
     A = generateA(int(h))
-    ans = (1 / pow(h, 4)) * A.dot(ye)
+    ans = (1 / pow(h, 4)) * A.dot(y)
+    '''
+    alt = []
+    for i in range(0, 10):
+        temp = 0
+        for j in range(0, 10):
+            temp += A[i][j] * y[j]
+        alt.append(temp / pow(h, 4))
+    print(alt)
+    '''
     return ans
 
 
