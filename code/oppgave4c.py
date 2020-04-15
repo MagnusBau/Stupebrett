@@ -40,7 +40,7 @@ def derivert(n):
     A = genA(n)
     h = L / n
     ye1 = ye()
-    return (1 / h ** 4) * A * ye1
+    return -(1 / h ** 4) * A * ye1
 
 print("Numerisk fjerdederiverte: ")
 print(derivert(10))

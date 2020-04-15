@@ -1,5 +1,5 @@
 
-from oppgave4c import numFjerdeDer
+from oppgave4c import derivert
 import numpy as np
 from numpy import linalg as la
 from oppgave2 import generateA
@@ -21,7 +21,7 @@ compare = f/(E*I) * ones
 print("\n\noppgave d \n")
 print(compare)
 
-ans = numFjerdeDer()
+ans = derivert(10)
 A = generateA(int(h))
 
 foroverfeil = la.norm(ans-compare, np.inf)
