@@ -2,7 +2,7 @@ from oppgave2 import generateA
 import numpy as np
 from scipy.linalg import solve
 
-#Gitte bjelkeparametre.
+# Gitte bjelkeparametre.
 length = 2.0
 width = 0.3
 thickness = 0.03
@@ -13,23 +13,23 @@ E = 1.3 * pow(10, 10)  # Materialkonstanten N/m^2
 I = (width * pow(thickness, 3)) / 12.0 #Arealmomentet.
 f = - density * width * thickness * g
 
-#Løsning på Ay=b med størrelse (n)
+
+# Losning paa Ay=b med storrelse (n)
 def solve_3(n):
-	#Deler bjelkens lengde så alle segmentene er like.
+    # Deler bjelkens lengde saa alle segmentene er like.
     h = length / n
-	#Genererer båndmatrise (A matrisen)
+    # Genererer baandmatrise (A matrisen)
     matrixA = generateA(n)
-	#Genererer b-matrisen.
+    # Genererer b-matrisen.
     matrixB = np.array([[(pow(h, 4) / (E * I)) * f]] * n)
-	#Løser for Y basert på A og B.
+    # Loser for Y basert paa A og B.
     matrixY = solve(matrixA, matrixB)
-	#Finner kondisjonstallet.
+    # Finner kondisjonstallet.
     kondisjonstall = np.linalg.cond(matrixA)
-	#Returnerer løsningen og kondisjonstallet.
+    # Returnerer losningen og kondisjonstallet.
     return matrixY, kondisjonstall
 
 
-
-# print(matrixY)
-# # Check solution
-# print("Solution: " + str(np.allclose(np.dot(matrixA, matrixY), matrixB)))
+if __name__ == '__main__':
+    matrixY, kondisjonstall = solve_3(10)
+    print(matrixY)
