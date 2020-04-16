@@ -14,17 +14,19 @@ p = 100.0  # kg/m
 Lp = length / np.pi
 personWeight = 50.0
 personLength = 0.3
-
+# Correct_solution må også regne ut funksjonen for sinushaugen.
 correct_solution = (f / (24 * E * I)) * pow(length, 2) * (pow(length, 2) - 4 * length * length + 6 * pow(length, 2)) \
                    - (((g * p * length) / (E * I * np.pi)) * (((pow(Lp, 3)) * np.sin(np.pi)) - (pow(length, 3) / 6) + (pow(
     length, 3) / 2) - (pow(length, 3) / pow(np.pi, 2))))
 
 
+# vi trenger en funksjon for s(x) for å løse f(x) + s(x)
 def solve_s(x):
-    s = - p * g * np.sin(np.pi/length * x)
+    s = - p * g * np.sin((np.pi/length) * x)
     return s
 
 
+# Vi bruker solve_s(x) i matrixB, returnerer matrixY og kondisjonstallet
 def solve_6(n):
     h = length / n
     matrixA = generateA(n)
@@ -37,6 +39,7 @@ def solve_6(n):
     return matrixY, kondisjonstall
 
 
+# Skriver ut tilnærming, kondisjonstall og feil for utvalgte n-verdier
 for j in range(1, 12):
     n = 10 * pow(2, j)
     approx, kondisjonstall = solve_6(n)
